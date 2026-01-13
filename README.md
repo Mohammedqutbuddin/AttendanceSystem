@@ -1,16 +1,5 @@
 # AttendanceSystem
-Below is a clean, structured, professional **README.md** suitable for GitHub.
-It explains the project, the tech stack, features, setup instructions, and how everything works.
 
-You can copy-paste it directly into your repository.
-
-
-
-Face Recognition Attendance System
-
-A Python-based biometric attendance tracking system using face recognition, OpenCV, and SQLite. The project captures real-time video, detects faces, recognizes registered students, and marks attendance automatically.
-
----
 
 📌 Project Overview
 
