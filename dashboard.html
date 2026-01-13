@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="card">
+    <h3 style="color: var(--accent);text-shadow: 0 0 10px var(--accent-glow);">📊 Statistics</h3>
+    <p><strong>Total Students:</strong> {{ student_count }}</p>
+    <p><strong>Today's Attendance:</strong> {{ today_count }}</p>
+</div>
+
+<div class="card">
+    <h3 style="color: var(--accent);text-shadow: 0 0 10px var(--accent-glow);">📋 Attendance Records</h3>
+
+    <button onclick="window.location='/export'" style="margin-bottom:15px;">⬇ Download CSV</button>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Course</th>
+        </tr>
+
+        {% for r in attendance %}
+        <tr style="animation: fadeInRow .4s ease-out {{ loop.index0 * 0.07 }}s;">
+            <td>{{ r[0] }}</td>
+            <td>{{ r[1] }}</td>
+            <td>{{ r[2] }}</td>
+            <td>{{ r[3] }}</td>
+            <td>{{ r[4] }}</td>
+        </tr>
+        {% endfor %}
+
+        {% if attendance|length == 0 %}
+        <tr>
+            <td colspan="5" style="text-align:center;color:var(--text-muted);padding:20px;">
+                No records yet.
+            </td>
+        </tr>
+        {% endif %}
+    </table>
+</div>
+
+<style>
+@keyframes fadeInRow {
+    from { opacity: 0; transform: translateX(-12px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+</style>
+
+{% endblock %}

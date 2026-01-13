@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="card">
+    <h3 style="color: var(--accent);">🎥 Live Recognition</h3>
+
+    <div style="text-align:center;">
+        <img src="{{ url_for('video_feed') }}"
+             style="width:100%;border-radius:12px;box-shadow:0 0 25px var(--accent-glow);animation: glowPulse 2s infinite;">
+    </div>
+</div>
+
+<style>
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 22px var(--accent-glow); }
+    50% { box-shadow: 0 0 34px var(--accent-glow); }
+}
+</style>
+
+{% endblock %}

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance System</title>
+
+    <style>
+        :root {
+            --bg: #0b0d10;
+            --card: rgba(255, 255, 255, 0.06);
+            --glass: rgba(255, 255, 255, 0.08);
+            --accent: #4f8cff;
+            --accent-glow: #4f8cff88;
+            --text: #e8e8ff;
+            --text-muted: #8f8f99;
+            --success: #4fff91;
+            --danger: #ff4f6a;
+        }
+
+        /* Smooth fade-in animation for full page */
+        body {
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            animation: fadeIn 0.7s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header with shadow + glass effect */
+        header {
+            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.35);
+            color: var(--text);
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        h2 {
+            margin: 0;
+            letter-spacing: 0.5px;
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            margin-left: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color .25s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .container {
+            padding: 25px;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .alert-error {
+            background: rgba(255, 79, 106, 0.2);
+            border-left: 4px solid var(--danger);
+        }
+
+        .alert-success {
+            background: rgba(79, 255, 145, 0.15);
+            border-left: 4px solid var(--success);
+        }
+
+        /* Glass-effect cards with hover animations */
+        .card {
+            background: var(--glass);
+            padding: 22px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            animation: cardFade .6s ease-out;
+            transition: transform .25s, box-shadow .25s;
+        }
+
+        @keyframes cardFade {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 24px var(--accent-glow);
+        }
+
+        /* Buttons with neon glow */
+        button, .btn {
+            background: var(--accent);
+            padding: 12px 22px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            color: black;
+            letter-spacing: 0.4px;
+            transition: 0.3s;
+            box-shadow: 0 0 14px var(--accent-glow);
+        }
+
+        button:hover, .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 18px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background: #1d1e24;
+            color: var(--text);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: #2d2e35;
+        }
+
+        /* Inputs */
+        input {
+            width: 100%;
+            padding: 12px;
+            background: #0e1014;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: var(--text);
+            margin-bottom: 20px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 8px var(--accent-glow);
+            outline: none;
+        }
+
+        /* Neon table rows */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+
+        th {
+            background: #15171c;
+            color: var(--accent);
+            padding: 12px;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 11px;
+            border-bottom: 1px solid #2a2b31;
+            color: var(--text-muted);
+            transition: 0.25s;
+        }
+
+        tr:hover td {
+            background: #1a1c22;
+            color: var(--text);
+            text-shadow: 0 0 6px var(--accent-glow);
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>⚡ Attendance System</h2>
+    <nav>
+        <a href="/">Dashboard</a>
+        <a href="/register">Register</a>
+        <a href="/live">Live Monitor</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for cat, msg in messages %}
+            <div class="alert alert-{{ cat }}">{{ msg }}</div>
+        {% endfor %}
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+
+</div>
+
+</body>
+</html>
